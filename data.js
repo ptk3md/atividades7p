@@ -1,11 +1,11 @@
 // data.js
 // Define uma variável global que será lida pelo index.html
 const EXTERNAL_CONFIG = {
-  year: 2025,
+  year: 2026,
   semesterStart: '2025-02-01',
   semesterEnd:   '2025-06-30',
-  title: "Calendário Acadêmico",
-  subtitle: "Semestre 2025.1",
+  title: "Calendário de Atividades",
+  subtitle: "Semestre 2026.1",
   
   // Lista de Dados
   data: [
