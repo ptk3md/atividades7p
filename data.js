@@ -7,7 +7,7 @@ const EXTERNAL_CONFIG = {
   
   data: [
     // --- JANEIRO 2026 (TESTE DO PASSADO) ---
-    { d: "20/01", disc: "Teste", title: "Evento Passado (Teste)", type: "pratica" },
+    { d: "09/02", disc: "Início do caos", title: "", type: "pratica" },
 
     // --- MARÇO 2026 ---
     { d: "02/03", disc: "Ortopedia", title: "Seminário Ortop", type: "trabalho" },
