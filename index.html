@@ -9,7 +9,6 @@
 <style>
   /* ─── VARIÁVEIS & TEMAS ─── */
   :root {
-    /* Cores Padrão (Dark Mode) */
     --bg-color: #0f172a;
     --bg-gradient-1: rgba(59, 130, 246, 0.08);
     --bg-gradient-2: rgba(239, 68, 68, 0.05);
@@ -31,33 +30,28 @@
     --input-bg: rgba(0,0,0,0.2);
     
     /* Status Colors */
-    --danger: #ef4444;   /* Provas */
-    --success: #10b981;  /* Práticas */
-    --warning: #f59e0b;  /* Finais */
-    --info: #3b82f6;     /* Trabalhos/Seminários */
+    --danger: #ef4444;   
+    --success: #10b981;  
+    --warning: #f59e0b;  
+    --info: #3b82f6;     
     
     --radius: 16px;
     --font: 'Plus Jakarta Sans', sans-serif;
     --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
-  /* TEMA CLARO */
   [data-theme="light"] {
     --bg-color: #f0f4f8;
     --bg-gradient-1: rgba(59, 130, 246, 0.05);
     --bg-gradient-2: rgba(239, 68, 68, 0.05);
-    
     --card-bg: rgba(255, 255, 255, 0.65);
     --card-hover: rgba(255, 255, 255, 0.9);
     --card-border: rgba(0, 0, 0, 0.06);
-    
     --text-main: #1e293b;
     --text-muted: #64748b;
     --text-inverse: #ffffff;
-    
     --tag-bg: rgba(0,0,0,0.05);
     --input-bg: rgba(255,255,255,0.5);
-    
     --accent: #2563eb;
   }
 
@@ -79,16 +73,13 @@
 
   /* ─── HEADER ─── */
   header { margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-start; }
-  .header-text { flex: 1; }
   h1 { 
     font-size: 2rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom: 0.5rem;
     background: linear-gradient(to right, var(--text-main), var(--text-muted));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    transition: all var(--transition);
   }
   .subtitle { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 
-  /* Toggle Button */
   .theme-toggle {
     background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main);
     width: 44px; height: 44px; border-radius: 12px;
@@ -96,8 +87,6 @@
     transition: var(--transition); backdrop-filter: blur(8px);
   }
   .theme-toggle:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-  .theme-toggle:active { transform: scale(0.95); }
-  .theme-toggle svg { width: 22px; height: 22px; stroke-width: 2; }
 
   /* ─── CONTROLS ─── */
   .controls {
@@ -105,7 +94,7 @@
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius); padding: 1.5rem;
     box-shadow: 0 8px 32px rgba(0,0,0,0.05); margin-bottom: 2rem;
-    transition: background var(--transition), border var(--transition);
+    transition: background var(--transition);
   }
 
   .top-tools { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
@@ -122,28 +111,28 @@
   .tag {
     background: var(--tag-bg); border: 1px solid var(--card-border); color: var(--text-muted);
     padding: 8px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
-    cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); user-select: none;
+    cursor: pointer; transition: all 0.2s; user-select: none;
   }
   .tag:hover { background: var(--card-border); color: var(--text-main); transform: translateY(-1px); }
-  .tag.active { background: var(--tag-bg-active); color: white; border-color: var(--tag-bg-active); box-shadow: 0 4px 12px var(--accent-glow); transform: scale(1.05); }
+  .tag.active { background: var(--tag-bg-active); color: white; transform: scale(1.05); }
 
   .slider-container { margin-top: 1.8rem; padding: 0 0.5rem; }
-  .slider-info { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .slider-date-display { color: var(--accent); transition: color var(--transition); }
+  .slider-info { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; font-weight: 700; text-transform: uppercase; }
+  .slider-date-display { color: var(--accent); }
 
-  .range-wrapper { position: relative; height: 6px; background: var(--tag-bg); border-radius: 10px; margin: 10px 0; transition: background var(--transition); }
-  .range-fill { position: absolute; height: 100%; background: var(--accent); border-radius: 10px; z-index: 1; transition: width 0.1s, left 0.1s; }
+  .range-wrapper { position: relative; height: 6px; background: var(--tag-bg); border-radius: 10px; margin: 10px 0; }
+  .range-fill { position: absolute; height: 100%; background: var(--accent); border-radius: 10px; z-index: 1; }
   .range-input { position: absolute; top: -7px; width: 100%; height: 20px; appearance: none; background: transparent; pointer-events: none; z-index: 2; }
   .range-input::-webkit-slider-thumb {
     appearance: none; pointer-events: all; width: 20px; height: 20px; background: #fff;
     border: 2px solid var(--accent); border-radius: 50%; cursor: pointer;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2); margin-top: 1px;
-    transition: transform 0.2s, border-color var(--transition);
+    transition: transform 0.2s;
   }
   .range-input::-webkit-slider-thumb:hover { transform: scale(1.3); }
 
   /* ─── LISTA ─── */
-  .event-list { display: flex; flex-direction: column; gap: 0.8rem; padding-bottom: 2rem; }
+  .event-list { display: flex; flex-direction: column; gap: 0.8rem; padding-bottom: 1rem; }
   
   .event-card {
     display: grid; grid-template-columns: 70px 1fr auto; align-items: stretch;
@@ -155,16 +144,26 @@
   }
   .event-card:hover { transform: translateY(-3px) scale(1.005); background: var(--card-hover); border-color: var(--card-border); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); z-index: 2; }
 
+  /* Estilos específicos para cards passados (Histórico) */
+  .event-card.is-past {
+    filter: grayscale(0.8);
+    opacity: 0.6 !important; /* Força opacidade mesmo após animação */
+    border-color: transparent;
+  }
+  .event-card.is-past:hover {
+    filter: grayscale(0);
+    opacity: 1 !important;
+  }
+
   .date-box {
     background: var(--input-bg); display: flex; flex-direction: column;
     align-items: center; justify-content: center; padding: 0 10px;
     font-size: 1.1rem; font-weight: 800; line-height: 1; color: var(--text-muted);
-    transition: background var(--transition), color var(--transition);
   }
   .date-box span { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; opacity: 0.8; margin-top: 4px; }
 
   .info-box { padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; }
-  .event-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; color: var(--text-main); transition: color var(--transition); }
+  .event-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; color: var(--text-main); }
   .event-disc { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 
   .type-indicator { width: 5px; height: 100%; transition: background var(--transition); }
@@ -172,21 +171,58 @@
   /* Cores Tipos */
   .type-prova .date-box { color: var(--danger); background: rgba(239, 68, 68, 0.15); }
   .type-prova .type-indicator { background: var(--danger); }
-  
   .type-pratica .date-box { color: var(--success); background: rgba(16, 185, 129, 0.15); }
   .type-pratica .type-indicator { background: var(--success); }
-
   .type-trabalho .date-box { color: var(--info); background: rgba(59, 130, 246, 0.15); }
   .type-trabalho .type-indicator { background: var(--info); }
-
   .type-final .date-box { color: var(--warning); background: rgba(245, 158, 11, 0.15); }
   .type-final .type-indicator { background: var(--warning); }
 
-  .status-bar { margin-top: 1rem; text-align: center; font-size: 0.8rem; color: var(--text-muted); background: var(--tag-bg); padding: 8px 16px; border-radius: 99px; display: inline-block; transition: background var(--transition); }
+  /* ─── ARQUIVO / HISTÓRICO ─── */
+  .archive-section {
+    margin-top: 2rem;
+    border-top: 1px dashed var(--card-border);
+    padding-top: 2rem;
+  }
+  
+  .archive-header {
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-archive-toggle {
+    background: var(--tag-bg); color: var(--text-muted);
+    border: 1px solid var(--card-border);
+    padding: 10px 24px; border-radius: 99px;
+    font-family: var(--font); font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .btn-archive-toggle:hover {
+    background: var(--card-hover); color: var(--text-main); transform: translateY(-2px);
+  }
+  .btn-archive-toggle .count-badge {
+    background: var(--card-bg); padding: 2px 8px; border-radius: 10px; font-size: 0.75rem;
+  }
+  .btn-archive-toggle.open {
+    background: var(--accent); color: white; border-color: var(--accent);
+  }
+  .btn-archive-toggle.open .count-badge { color: var(--accent); background: white; }
+
+  .archive-list {
+    display: none; /* Escondido por padrão */
+    flex-direction: column; gap: 0.8rem;
+    padding-bottom: 3rem;
+  }
+  .archive-list.visible { display: flex; animation: fadeIn 0.3s ease; }
+
+  .status-bar { margin-top: 1rem; text-align: center; font-size: 0.8rem; color: var(--text-muted); background: var(--tag-bg); padding: 8px 16px; border-radius: 99px; display: inline-block; }
   .counter { color: var(--text-main); font-weight: 800; margin-right: 4px; }
   
-  .empty-state { text-align: center; padding: 4rem 1rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; animation: fadeInUp 0.4s ease; }
+  .empty-state { text-align: center; padding: 4rem 1rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
+  
   @keyframes fadeInUp { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
   @media (max-width: 480px) {
     h1 { font-size: 1.6rem; }
@@ -210,12 +246,8 @@
       <div class="subtitle" id="appSubtitle">Carregando...</div>
     </div>
     <button class="theme-toggle" id="themeBtn" aria-label="Alternar tema">
-      <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:block">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-      </svg>
-      <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-      </svg>
+      <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:block"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+      <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
     </button>
   </header>
 
@@ -240,17 +272,27 @@
   <main id="eventsContainer" class="event-list"></main>
   
   <div style="text-align: center;">
-    <div class="status-bar">Atividades listadas: <span class="counter" id="countDisplay">0</span></div>
+    <div class="status-bar">Atividades pendentes: <span class="counter" id="countDisplay">0</span></div>
   </div>
+
+  <div class="archive-section" id="archiveSection" style="display: none;">
+    <div class="archive-header">
+        <button class="btn-archive-toggle" id="btnToggleArchive">
+            <span>Ver Atividades Concluídas</span>
+            <span class="count-badge" id="archiveCount">0</span>
+        </button>
+    </div>
+    <div id="archiveContainer" class="archive-list"></div>
+  </div>
+
 </div>
 
 <script src="data.js"></script>
 
 <script>
 if (typeof EXTERNAL_CONFIG === 'undefined') {
-    alert("ERRO: O arquivo 'data.js' não foi carregado. Verifique se ele está na pasta.");
+    alert("ERRO: O arquivo 'data.js' não foi carregado.");
 }
-
 const CONFIG = EXTERNAL_CONFIG;
 
 class App {
@@ -259,13 +301,27 @@ class App {
     this.startDate = new Date(CONFIG.semesterStart);
     this.endDate = new Date(CONFIG.semesterEnd);
     this.totalDays = Math.ceil((this.endDate - this.startDate) / (1000 * 60 * 60 * 24));
-    this.state = { minVal: 0, maxVal: this.totalDays, activeDisc: 'Todas', searchTerm: '' };
+    
+    // Normalizar o "Hoje" para meia-noite
+    this.today = new Date();
+    this.today.setHours(0,0,0,0);
+
+    // Estado da Aplicação
+    this.state = { 
+        minVal: 0, 
+        maxVal: this.totalDays, 
+        activeDisc: 'Todas', 
+        searchTerm: '',
+        isArchiveOpen: false
+    };
     this.init();
   }
 
   init() {
     document.getElementById('appTitle').innerText = CONFIG.title;
     document.getElementById('appSubtitle').innerText = CONFIG.subtitle;
+    
+    // Processamento Inicial
     this.events = CONFIG.data.map(item => {
       const [day, month] = item.d.split('/').map(Number);
       const dateObj = new Date(CONFIG.year, month - 1, day);
@@ -276,6 +332,7 @@ class App {
     this.setupFilters();
     this.setupSlider();
     this.setupSearch();
+    this.setupArchive();
     this.render();
   }
 
@@ -345,35 +402,34 @@ class App {
     });
   }
 
+  setupArchive() {
+    const btn = document.getElementById('btnToggleArchive');
+    btn.addEventListener('click', () => {
+        this.state.isArchiveOpen = !this.state.isArchiveOpen;
+        const list = document.getElementById('archiveContainer');
+        
+        if (this.state.isArchiveOpen) {
+            btn.classList.add('open');
+            list.classList.add('visible');
+            btn.querySelector('span').innerText = "Ocultar Concluídas";
+        } else {
+            btn.classList.remove('open');
+            list.classList.remove('visible');
+            btn.querySelector('span').innerText = "Ver Atividades Concluídas";
+        }
+    });
+  }
+
   getDateOffset(off) { const d = new Date(this.startDate); d.setDate(d.getDate() + off); return d; }
   fmtDate(d) { return new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short' }).format(d); }
   fmtBox(d) { return { day: d.getDate().toString().padStart(2,'0'), month: new Intl.DateTimeFormat('pt-BR',{month:'short'}).format(d).replace('.','') }; }
 
-  render() {
-    const container = document.getElementById('eventsContainer');
-    const rStart = this.getDateOffset(this.state.minVal);
-    const rEnd = this.getDateOffset(this.state.maxVal);
-    
-    const filtered = this.events.filter(ev => {
-      const inDate = ev.dateObj >= rStart && ev.dateObj <= rEnd;
-      const inDisc = this.state.activeDisc === 'Todas' || ev.disc === this.state.activeDisc;
-      const inSearch = ev.title.toLowerCase().includes(this.state.searchTerm) || ev.disc.toLowerCase().includes(this.state.searchTerm);
-      return inDate && inDisc && inSearch;
-    });
-
-    document.getElementById('countDisplay').innerText = filtered.length;
-    container.innerHTML = '';
-
-    if (filtered.length === 0) {
-      container.innerHTML = `<div class="empty-state"><div style="font-size: 2rem; margin-bottom:10px;">🍃</div>Nenhuma atividade encontrada.</div>`;
-      return;
-    }
-
-    filtered.forEach((ev, idx) => {
+  createCard(ev, isPast = false) {
       const { day, month } = this.fmtBox(ev.dateObj);
       const el = document.createElement('div');
-      el.className = `event-card type-${ev.type}`;
-      el.style.animationDelay = `${Math.min(idx * 0.05, 0.5)}s`;
+      el.className = `event-card type-${ev.type} ${isPast ? 'is-past' : ''}`;
+      if(!isPast) el.style.animationDelay = "0.05s"; 
+      
       el.innerHTML = `
         <div class="date-box">${day}<span>${month}</span></div>
         <div class="info-box">
@@ -381,10 +437,70 @@ class App {
           <div class="event-disc">${ev.disc}</div>
         </div>
         <div class="type-indicator" title="${ev.type}"></div>`;
-      container.appendChild(el);
+      return el;
+  }
+
+  render() {
+    const mainContainer = document.getElementById('eventsContainer');
+    const archiveContainer = document.getElementById('archiveContainer');
+    const archiveSection = document.getElementById('archiveSection');
+    
+    const rStart = this.getDateOffset(this.state.minVal);
+    const rEnd = this.getDateOffset(this.state.maxVal);
+    
+    // 1. Filtragem Base (Texto e Disciplina)
+    const filteredBase = this.events.filter(ev => {
+        const inDisc = this.state.activeDisc === 'Todas' || ev.disc === this.state.activeDisc;
+        const inSearch = ev.title.toLowerCase().includes(this.state.searchTerm) || ev.disc.toLowerCase().includes(this.state.searchTerm);
+        return inDisc && inSearch;
     });
+
+    // 2. Separação: Passado vs Futuro/Hoje
+    // isPast se a data for estritamente menor que Hoje (00:00:00)
+    const futureEvents = [];
+    const pastEvents = [];
+
+    filteredBase.forEach(ev => {
+        if (ev.dateObj < this.today) {
+            pastEvents.push(ev);
+        } else {
+            // Aplicar filtro de Data do Slider APENAS para eventos futuros
+            if (ev.dateObj >= rStart && ev.dateObj <= rEnd) {
+                futureEvents.push(ev);
+            }
+        }
+    });
+
+    // 3. Atualizar Contadores
+    document.getElementById('countDisplay').innerText = futureEvents.length;
+    document.getElementById('archiveCount').innerText = pastEvents.length;
+
+    // 4. Renderizar Principal (Futuro)
+    mainContainer.innerHTML = '';
+    if (futureEvents.length === 0) {
+      mainContainer.innerHTML = `<div class="empty-state"><div style="font-size: 2rem; margin-bottom:10px;">🍃</div>Nenhuma atividade pendente no período.</div>`;
+    } else {
+      futureEvents.forEach((ev) => {
+        mainContainer.appendChild(this.createCard(ev, false));
+      });
+    }
+
+    // 5. Renderizar Arquivo (Passado)
+    // Mostramos a seção se houver itens no histórico
+    if (pastEvents.length > 0) {
+        archiveSection.style.display = 'block';
+        archiveContainer.innerHTML = '';
+        // Inverter ordem para mostrar o mais recente primeiro no histórico? 
+        // Normalmente histórico é descendente, mas manteremos ascendente por consistência.
+        pastEvents.forEach((ev) => {
+            archiveContainer.appendChild(this.createCard(ev, true));
+        });
+    } else {
+        archiveSection.style.display = 'none';
+    }
   }
 }
+
 window.onload = () => new App();
 </script>
 </body>
