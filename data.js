@@ -2,8 +2,8 @@
 // Define uma variável global que será lida pelo index.html
 const EXTERNAL_CONFIG = {
   year: 2026,
-  semesterStart: '2025-02-01',
-  semesterEnd:   '2025-06-30',
+  semesterStart: '2026-02-01',
+  semesterEnd:   '2026-06-30',
   title: "Calendário de Atividades",
   subtitle: "Semestre 2026.1",
   
