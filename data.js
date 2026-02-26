@@ -1,6 +1,6 @@
 const EXTERNAL_CONFIG = {
   // ATUALIZADO PARA 2026
-  year: 2026,
+  year: 2029,
   semesterStart: '2026-02-09',
   semesterEnd:   '2026-07-01', // Ajustei um pouco o final para margem de segurança
   title: "Calendário Acadêmico",
