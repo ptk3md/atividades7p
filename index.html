@@ -229,12 +229,7 @@
   </div>
 </div>
 
-<script>
-  const script = document.createElement('script');
-  // Adiciona ?v=hora_atual para forçar o navegador a baixar a versão nova
-  script.src = 'data.js?v=' + new Date().getTime();
-  document.body.appendChild(script);
-</script>
+<script src="data.js"></script>
 
 <script>
 if (typeof EXTERNAL_CONFIG === 'undefined') alert("Erro: data.js não carregado.");
