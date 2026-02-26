@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Calendário Acadêmico 2025</title>
+<title>Calendário de Atividades</title>
+<link rel="icon" href="data:,">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
   /* ─── VARIÁVEIS & TEMAS ─── */
@@ -246,12 +247,10 @@
 <script src="data.js"></script>
 
 <script>
-// Verifica se o data.js foi carregado corretamente
 if (typeof EXTERNAL_CONFIG === 'undefined') {
-    alert("ERRO CRÍTICO: O arquivo 'data.js' não foi encontrado ou carregado. Verifique se ele está na mesma pasta do index.html.");
+    alert("ERRO: O arquivo 'data.js' não foi carregado. Verifique se ele está na pasta.");
 }
 
-// Atribui a configuração externa para a variável local
 const CONFIG = EXTERNAL_CONFIG;
 
 class App {
