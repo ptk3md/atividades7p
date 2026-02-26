@@ -9,212 +9,101 @@
 <meta http-equiv="Expires" content="0" />
 
 <title>Calendário Acadêmico 2026</title>
-
 <link rel="icon" type="image/png" href="favicon.ico">
-
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-  /* ─── VARIÁVEIS & CORES REFINADAS ─── */
+  /* ─── VARIÁVEIS ─── */
   :root {
-    /* MODO ESCURO MAIS PROFUNDO E DESSATURADO */
-    --bg-color: #0a0a0a; /* Quase preto */
-    --card-bg: rgba(24, 24, 24, 0.85); /* Carvão escuro */
+    --bg-color: #0a0a0a;
+    --card-bg: rgba(24, 24, 24, 0.85);
     --card-hover: rgba(255, 255, 255, 0.03);
     --card-border: rgba(255, 255, 255, 0.05);
-    --text-main: #e0e0e0; /* Branco suave */
-    --text-muted: #888888; /* Cinza médio */
-    --accent: #5c8dd6; /* Azul dessaturado */
+    --text-main: #e0e0e0;
+    --text-muted: #888888;
+    --accent: #5c8dd6;
     --tag-bg: rgba(255,255,255,0.05);
     --tag-bg-active: var(--accent);
     --input-bg: rgba(20, 20, 20, 0.9);
     
-    /* Status Colors (Levemente ajustadas para dark) */
-    --danger: #cf4c4c;   
-    --success: #2ea073;  
-    --warning: #c78e28;  
-    --info: #4a7abd;     
-    
-    --radius: 16px;
-    --font: 'Plus Jakarta Sans', sans-serif;
-    /* Transição padronizada e mais suave */
-    --transition: 0.3s ease-in-out;
+    --danger: #cf4c4c; --success: #2ea073; --warning: #c78e28; --info: #4a7abd;
+    --radius: 16px; --font: 'Plus Jakarta Sans', sans-serif; --transition: 0.3s ease-in-out;
   }
 
   [data-theme="light"] {
-    /* MODO CLARO MAIS ACINZENTADO PARA CONFORTO VISUAL */
-    --bg-color: #e5e7eb; /* Cinza claro, não branco */
-    --card-bg: rgba(250, 250, 250, 0.8); /* Off-white */
-    --card-hover: rgba(255, 255, 255, 0.95);
-    --card-border: rgba(0, 0, 0, 0.04);
-    --text-main: #333333; /* Preto suave */
-    --text-muted: #666666;
-    --tag-bg: rgba(0,0,0,0.04);
-    --input-bg: rgba(240, 240, 240, 0.9);
-    --accent: #3b71ca; /* Azul um pouco mais sóbrio */
+    --bg-color: #e5e7eb; --card-bg: rgba(250, 250, 250, 0.8);
+    --card-hover: rgba(255, 255, 255, 0.95); --card-border: rgba(0, 0, 0, 0.04);
+    --text-main: #333333; --text-muted: #666666;
+    --tag-bg: rgba(0,0,0,0.04); --input-bg: rgba(240, 240, 240, 0.9);
+    --accent: #3b71ca;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
-  
-  body {
-    font-family: var(--font);
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    min-height: 100vh;
-    padding: 2rem 1rem;
-    padding-top: 3rem;
-    /* Transição suave aplicada globalmente ao body */
-    transition: background-color var(--transition), color var(--transition);
-  }
-
+  body { font-family: var(--font); background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; padding: 2rem 1rem; padding-top: 3rem; transition: background-color var(--transition), color var(--transition); }
   .container { max-width: 720px; margin: 0 auto; position: relative; }
 
-  /* BARRA DE PROGRESSO */
-  .progress-container {
-    position: fixed; top: 0; left: 0; width: 100%; height: 6px;
-    background: var(--tag-bg); z-index: 1000;
-    transition: background-color var(--transition);
-  }
-  .progress-bar {
-    height: 100%; background: linear-gradient(90deg, var(--accent), var(--success));
-    width: 0%; transition: width 1s ease-out;
-    box-shadow: 0 0 10px var(--accent);
-  }
-  .progress-label {
-    position: fixed; top: 10px; right: 10px; font-size: 0.7rem; 
-    font-weight: 700; color: var(--text-muted); z-index: 1001;
-    background: var(--card-bg); padding: 4px 8px; border-radius: 8px;
-    border: 1px solid var(--card-border); backdrop-filter: blur(4px);
-    transition: background-color var(--transition), border-color var(--transition), color var(--transition);
-  }
+  /* PROGRESSO */
+  .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 6px; background: var(--tag-bg); z-index: 1000; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); width: 0%; transition: width 1s ease-out; box-shadow: 0 0 10px var(--accent); }
+  .progress-label { position: fixed; top: 10px; right: 10px; font-size: 0.7rem; font-weight: 700; color: var(--text-muted); z-index: 1001; background: var(--card-bg); padding: 4px 8px; border-radius: 8px; border: 1px solid var(--card-border); backdrop-filter: blur(4px); }
 
-  /* HEADER & CONTROLS */
+  /* HEADER */
   header { margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-start; }
   h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom: 0.5rem; }
   .subtitle { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; }
-
-  .theme-toggle {
-    background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main);
-    width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: var(--transition);
-  }
+  .theme-toggle { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition); }
   .theme-toggle svg { width: 18px; height: 18px; }
 
-  .controls {
-    background: var(--card-bg); border: 1px solid var(--card-border);
-    backdrop-filter: blur(12px); border-radius: var(--radius); padding: 1.5rem;
-    margin-bottom: 2rem;
-    transition: background-color var(--transition), border-color var(--transition);
-  }
+  /* CONTROLS */
+  .controls { background: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(12px); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 2rem; transition: background-color var(--transition), border-color var(--transition); }
   .top-tools { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
   .search-box { flex: 1; position: relative; }
-  .search-box input {
-    width: 100%; background: var(--input-bg); border: 1px solid var(--card-border);
-    color: var(--text-main); padding: 12px 12px 12px 40px; border-radius: 10px;
-    font-family: var(--font); font-weight: 500;
-    transition: var(--transition);
-  }
+  .search-box input { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 12px 12px 12px 40px; border-radius: 10px; font-family: var(--font); font-weight: 500; transition: var(--transition); }
   .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); width: 18px; }
-
   .filter-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-  .tag {
-    background: var(--tag-bg); border: 1px solid var(--card-border); color: var(--text-muted);
-    padding: 8px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
-    cursor: pointer; transition: all 0.2s;
-  }
+  .tag { background: var(--tag-bg); border: 1px solid var(--card-border); color: var(--text-muted); padding: 8px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
   .tag.active { background: var(--tag-bg-active); color: white; transform: scale(1.05); }
 
-  /* ─── STICKY HEADERS (Transição Corrigida) ─── */
-  .month-header {
-    position: sticky; top: 0px; z-index: 10;
-    background: var(--bg-color); /* Garante fundo sólido na transição */
-    backdrop-filter: blur(10px);
-    padding: 10px 0; margin-bottom: 10px;
-    font-size: 1.1rem; font-weight: 800; color: var(--accent);
-    border-bottom: 1px solid var(--card-border);
-    text-transform: capitalize;
-    /* Transição explícita para sincronizar com o body e evitar "quadrados" */
-    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
-  }
-
-  /* LISTA & CARDS (Transição Corrigida) */
+  /* LIST & CARDS */
+  .month-header { position: sticky; top: 0px; z-index: 10; background: var(--bg-color); backdrop-filter: blur(10px); padding: 10px 0; margin-bottom: 10px; font-size: 1.1rem; font-weight: 800; color: var(--accent); border-bottom: 1px solid var(--card-border); text-transform: capitalize; transition: background-color var(--transition), color var(--transition), border-color var(--transition); }
   .event-list { display: flex; flex-direction: column; gap: 0.8rem; padding-bottom: 1rem; }
-  
-  .event-card {
-    display: grid; grid-template-columns: 70px 1fr auto; align-items: stretch;
-    background: var(--card-bg); border-radius: 12px; overflow: hidden;
-    border: 1px solid transparent; cursor: default; position: relative;
-    /* Transição explícita do background e border */
-    transition: transform 0.2s, background-color var(--transition), border-color var(--transition);
-  }
+  .event-card { display: grid; grid-template-columns: 70px 1fr auto; align-items: stretch; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid transparent; cursor: default; position: relative; transition: transform 0.2s, background-color var(--transition), border-color var(--transition); }
   .event-card:hover { transform: translateY(-3px); background: var(--card-hover); border-color: var(--card-border); z-index: 2; }
-
-  .date-box {
-    background: var(--input-bg); display: flex; flex-direction: column;
-    align-items: center; justify-content: center; padding: 0 10px;
-    font-size: 1.1rem; font-weight: 800; line-height: 1; color: var(--text-muted);
-    transition: background-color var(--transition), color var(--transition);
-  }
-  .date-box span { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; margin-top: 4px; }
-
-  .info-box { padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; }
   
+  .date-box { background: var(--input-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 10px; font-size: 1.1rem; font-weight: 800; line-height: 1; color: var(--text-muted); transition: background-color var(--transition), color var(--transition); }
+  .date-box span { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; margin-top: 4px; }
+  .info-box { padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; }
   .card-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
   .event-name { font-weight: 700; font-size: 1rem; color: var(--text-main); transition: color var(--transition); }
   .event-disc { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-
   .type-indicator { width: 5px; height: 100%; transition: background-color var(--transition); }
-  
-  /* Cores Tipos (Transições ajustadas) */
-  .type-prova .date-box { color: var(--danger); background: rgba(207, 76, 76, 0.15); }
-  .type-prova .type-indicator { background: var(--danger); }
-  .type-pratica .date-box { color: var(--success); background: rgba(46, 160, 115, 0.15); }
-  .type-pratica .type-indicator { background: var(--success); }
-  .type-trabalho .date-box { color: var(--info); background: rgba(74, 122, 189, 0.15); }
-  .type-trabalho .type-indicator { background: var(--info); }
-  .type-final .date-box { color: var(--warning); background: rgba(199, 142, 40, 0.15); }
-  .type-final .type-indicator { background: var(--warning); }
 
-  /* BADGES */
-  .badge {
-    font-size: 0.65rem; font-weight: 800; padding: 3px 8px; border-radius: 6px;
-    letter-spacing: 0.05em; margin-left: 10px; text-transform: uppercase;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
-  }
+  /* CORES TIPOS */
+  .type-prova .date-box { color: var(--danger); background: rgba(207, 76, 76, 0.15); } .type-prova .type-indicator { background: var(--danger); }
+  .type-pratica .date-box { color: var(--success); background: rgba(46, 160, 115, 0.15); } .type-pratica .type-indicator { background: var(--success); }
+  .type-trabalho .date-box { color: var(--info); background: rgba(74, 122, 189, 0.15); } .type-trabalho .type-indicator { background: var(--info); }
+  .type-final .date-box { color: var(--warning); background: rgba(199, 142, 40, 0.15); } .type-final .type-indicator { background: var(--warning); }
+
+  /* EXTRAS */
+  .badge { font-size: 0.65rem; font-weight: 800; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.05em; margin-left: 10px; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background-color var(--transition), color var(--transition); }
   .badge-today { background: var(--danger); color: white; animation: pulse 1.5s infinite; }
   .badge-soon { background: var(--warning); color: #000; }
-
   @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
-  /* BOTÃO CALENDÁRIO */
+  
   .actions { padding: 0 10px; display: flex; align-items: center; justify-content: center; }
-  .btn-add-cal {
-    background: transparent; border: none; color: var(--text-muted);
-    cursor: pointer; padding: 8px; border-radius: 8px; transition: all 0.2s;
-  }
+  .btn-add-cal { background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 8px; border-radius: 8px; transition: all 0.2s; }
   .btn-add-cal:hover { background: var(--tag-bg); color: var(--accent); transform: scale(1.1); }
   .btn-add-cal svg { width: 20px; height: 20px; }
 
-  /* SKELETON LOADING */
-  .skeleton {
-    background: linear-gradient(90deg, var(--card-border) 25%, var(--card-hover) 50%, var(--card-border) 75%);
-    background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px;
-  }
-  .sk-card { height: 74px; border-radius: 12px; margin-bottom: 10px; }
-  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
   /* ARQUIVO */
-  .archive-section { 
-    margin-top: 2rem; border-top: 1px dashed var(--card-border); padding-top: 2rem;
-    transition: border-color var(--transition);
-  }
-  .btn-archive-toggle {
-    background: var(--tag-bg); color: var(--text-muted); border: 1px solid var(--card-border);
-    padding: 10px 24px; border-radius: 99px; font-size: 0.85rem; font-weight: 700;
-    cursor: pointer; width: 100%; transition: var(--transition);
-  }
+  .archive-section { margin-top: 2rem; border-top: 1px dashed var(--card-border); padding-top: 2rem; transition: border-color var(--transition); }
+  .btn-archive-toggle { background: var(--tag-bg); color: var(--text-muted); border: 1px solid var(--card-border); padding: 10px 24px; border-radius: 99px; font-size: 0.85rem; font-weight: 700; cursor: pointer; width: 100%; transition: var(--transition); }
   .btn-archive-toggle:hover { background: var(--card-hover); color: var(--text-main); }
   .event-card.is-past { filter: grayscale(1); opacity: 0.5; }
+
+  /* SKELETON */
+  .skeleton { background: linear-gradient(90deg, var(--card-border) 25%, var(--card-hover) 50%, var(--card-border) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
+  .sk-card { height: 74px; border-radius: 12px; margin-bottom: 10px; }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 </style>
 </head>
 <body>
@@ -250,64 +139,35 @@
 </div>
 
 <script>
-const EXTERNAL_CONFIG = {
-  year: 2026,
-  semesterStart: '2026-02-01',
-  semesterEnd:   '2026-07-15',
-  title: "Calendário Acadêmico",
-  subtitle: "Semestre 2026.1",
-  data: [
-    { d: "02/03", disc: "Ortopedia", title: "Seminário Ortop", type: "trabalho" },
-    { d: "09/03", disc: "Ortopedia", title: "Seminário Ortop", type: "trabalho" },
-    { d: "23/03", disc: "Ortopedia", title: "Seminário Ortop", type: "trabalho" },
-    { d: "30/03", disc: "Oftalmologia", title: "P1 — Multimídia", type: "prova" },
-    { d: "06/04", disc: "Ortopedia", title: "Seminário Ortop", type: "trabalho" },
-    { d: "08/04", disc: "Clínica Médica", title: "AVE1 Clínica", type: "prova" },
-    { d: "10/04", disc: "Ginecologia", title: "B1 Hac GO", type: "pratica" },
-    { d: "13/04", disc: "Ginecologia", title: "AV1 GO", type: "prova" },
-    { d: "13/04", disc: "Ortopedia", title: "Seminário 7", type: "trabalho" },
-    { d: "17/04", disc: "Ginecologia", title: "B1 DPGO", type: "pratica" },
-    { d: "20/04", disc: "Ortopedia", title: "AVT1 Ortop", type: "prova" },
-    { d: "24/04", disc: "Ginecologia", title: "B2 Hac GO", type: "pratica" },
-    { d: "27/04", disc: "Oftalmologia", title: "AVT1 Oftalmo", type: "prova" },
-    { d: "04/05", disc: "Oftalmologia", title: "Prática de Oftalmo", type: "pratica" },
-    { d: "08/05", disc: "Ginecologia", title: "B2 DPGO", type: "pratica" },
-    { d: "11/05", disc: "Oftalmologia", title: "Seminário 1", type: "trabalho" },
-    { d: "15/05", disc: "Clínica Médica", title: "B2 CSR", type: "pratica" },
-    { d: "15/05", disc: "Ginecologia", title: "B3 Hac GO", type: "pratica" },
-    { d: "22/05", disc: "Clínica Médica", title: "B2 CSR", type: "pratica" },
-    { d: "22/05", disc: "Ginecologia", title: "B3 DPGO", type: "pratica" },
-    { d: "25/05", disc: "Oftalmologia", title: "Seminário 2", type: "trabalho" },
-    { d: "29/05", disc: "Clínica Médica", title: "B3 CSR", type: "pratica" },
-    { d: "29/05", disc: "Ginecologia", title: "B4 Hac GO", type: "pratica" },
-    { d: "01/06", disc: "Oftalmologia", title: "Prática Oftalmo", type: "pratica" },
-    { d: "05/06", disc: "Clínica Médica", title: "B3 CSR", type: "pratica" },
-    { d: "05/06", disc: "Ginecologia", title: "B4 DPGO", type: "pratica" },
-    { d: "08/06", disc: "Oftalmologia", title: "AVE2 Oftalmo", type: "prova" },
-    { d: "11/06", disc: "Clínica Médica", title: "AVE2 Clínica", type: "prova" },
-    { d: "12/06", disc: "Clínica Médica", title: "B4 CSR", type: "pratica" },
-    { d: "15/06", disc: "Oftalmologia", title: "P2 (Projeto Mídias)", type: "trabalho" },
-    { d: "16/06", disc: "Pediatria", title: "OSCE Pediatria", type: "prova" },
-    { d: "16/06", disc: "Clínica Médica", title: "AVP2 (Início)", type: "final" },
-    { d: "19/06", disc: "Clínica Médica", title: "B4 CSR (e fim AVP2)", type: "pratica" },
-    { d: "22/06", disc: "Ginecologia", title: "AV2 GO", type: "final" }
-  ]
-};
+    // Isso força o navegador a baixar o data.js novo a cada reload
+    const script = document.createElement('script');
+    script.src = 'data.js?v=' + new Date().getTime();
+    document.body.appendChild(script);
+
+    script.onload = () => {
+        new App(); // Inicia o app apenas quando os dados chegarem
+    };
+    script.onerror = () => {
+        alert("Erro ao carregar 'data.js'. Verifique se o arquivo existe.");
+    };
 </script>
 
 <script>
-const CONFIG = EXTERNAL_CONFIG;
-
 class App {
   constructor() {
     this.events = [];
     this.today = new Date(); this.today.setHours(0,0,0,0);
     this.state = { activeDisc: 'Todas', searchTerm: '', isArchiveOpen: false };
+    
+    // Verifica se os dados carregaram
+    if (typeof EXTERNAL_CONFIG === 'undefined') return;
+    
     this.renderSkeleton();
-    setTimeout(() => this.init(), 800);
+    setTimeout(() => this.init(), 600);
   }
 
   init() {
+    const CONFIG = EXTERNAL_CONFIG;
     this.events = CONFIG.data.map(item => {
       const [d, m] = item.d.split('/').map(Number);
       const dateObj = new Date(CONFIG.year, m - 1, d);
@@ -321,13 +181,13 @@ class App {
     this.setupFilters();
     this.setupSearch();
     this.setupArchive();
-    this.updateProgress();
+    this.updateProgress(CONFIG);
     this.render();
   }
 
-  updateProgress() {
-    const start = new Date(CONFIG.semesterStart);
-    const end = new Date(CONFIG.semesterEnd);
+  updateProgress(config) {
+    const start = new Date(config.semesterStart);
+    const end = new Date(config.semesterEnd);
     const total = end - start;
     const current = this.today - start;
     let pct = Math.floor((current / total) * 100);
@@ -345,12 +205,13 @@ class App {
     let isDark = localStorage.getItem('theme') !== 'light';
     const apply = () => document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
     apply();
-    btn.addEventListener('click', () => { isDark = !isDark; localStorage.setItem('theme', isDark?'dark':'light'); apply(); });
+    btn.onclick = () => { isDark = !isDark; localStorage.setItem('theme', isDark?'dark':'light'); apply(); };
   }
 
   setupFilters() {
     const uniqueDiscs = ['Todas', ...new Set(this.events.map(e => e.disc))];
     const container = document.getElementById('disciplineFilters');
+    container.innerHTML = ''; // Limpa para evitar duplicatas
     uniqueDiscs.forEach(disc => {
       const btn = document.createElement('button');
       btn.className = `tag ${disc === 'Todas' ? 'active' : ''}`;
@@ -383,19 +244,14 @@ class App {
 
   fmtBox(d) { return { day: d.getDate().toString().padStart(2,'0'), month: d.toLocaleString('pt-BR',{month:'short'}).replace('.','') }; }
 
-  // NOVA FUNÇÃO: Link direto para Google Calendar
   openGoogleCalendar(ev) {
     const fmt = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, "").slice(0, 15) + "Z";
     const start = fmt(ev.dateObj);
     const endDate = new Date(ev.dateObj); endDate.setHours(endDate.getHours() + 1);
     const end = fmt(endDate);
-    
-    // Adiciona "Recurso Visual Adicionado" na descrição
-    const details = encodeURIComponent(`${ev.disc} - ${ev.type}. (Recurso Visual Adicionado)`);
+    const details = encodeURIComponent(`${ev.disc} - ${ev.type}.`);
     const title = encodeURIComponent(ev.title);
-    
-    const gCalUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&sf=true&output=xml`;
-    window.open(gCalUrl, '_blank');
+    window.open(`https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&sf=true&output=xml`, '_blank');
   }
 
   getUrgency(dateObj) {
@@ -413,7 +269,6 @@ class App {
     const el = document.createElement('div');
     el.className = `event-card type-${ev.type} ${isPast ? 'is-past' : ''}`;
     
-    // Botão Calendar Atualizado para Link
     const btnCal = document.createElement('button');
     btnCal.className = 'btn-add-cal';
     btnCal.title = "Abrir no Google Calendar";
@@ -474,8 +329,6 @@ class App {
     pastEvents.forEach(ev => archiveContainer.appendChild(this.createCard(ev, true)));
   }
 }
-
-window.onload = () => new App();
 </script>
 </body>
 </html>
