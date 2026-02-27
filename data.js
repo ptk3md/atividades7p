@@ -1,27 +1,21 @@
-const EXTERNAL_CONFIG = {
-  year: 2026,
-  semesterStart: '2026-02-09',
-  // Ajustado para cobrir a final de 07/07
-  semesterEnd:   '2026-07-07', 
-  title: "Calendário Acadêmico",
-  subtitle: "Semestre 2026.1",
-  
-  data: [
+data: [
     // --- JANEIRO/FEVEREIRO 2026 ---
     { d: "09/02", disc: "Início do caos", title: "Volta às Aulas", type: "outros" },
+    { d: "23/02", disc: "Ortopedia", title: "Seminário 1 Ortop", type: "trabalho" },
 
     // --- MARÇO 2026 ---
-    { d: "02/03", disc: "Ortopedia", title: "Seminário Ortop", type: "trabalho" },
-    { d: "09/03", disc: "Ortopedia", title: "Seminário Ortop", type: "trabalho" },
-    { d: "23/03", disc: "Ortopedia", title: "Seminário Ortop", type: "trabalho" },
+    { d: "02/03", disc: "Ortopedia", title: "Seminário 2 Ortop", type: "trabalho" },
+    { d: "09/03", disc: "Ortopedia", title: "Seminário 3 Ortop", type: "trabalho" },
+    { d: "23/03", disc: "Ortopedia", title: "Seminário 4 Ortop", type: "trabalho" },
     { d: "30/03", disc: "Oftalmologia", title: "P1 — Multimídia", type: "prova" },
+    { d: "30/03", disc: "Ortopedia", title: "Seminário 5 Ortop", type: "trabalho" },
 
     // --- ABRIL 2026 ---
-    { d: "06/04", disc: "Ortopedia", title: "Seminário Ortop", type: "trabalho" },
+    { d: "06/04", disc: "Ortopedia", title: "Seminário 6 Ortop", type: "trabalho" },
     { d: "08/04", disc: "Clínica Médica", title: "AVE1 Clínica", type: "prova" },
     { d: "10/04", disc: "Ginecologia", title: "B1 Hac GO", type: "pratica" },
     { d: "13/04", disc: "Ginecologia", title: "AV1 GO", type: "prova" },
-    { d: "13/04", disc: "Ortopedia", title: "Seminário 7", type: "trabalho" },
+    { d: "13/04", disc: "Ortopedia", title: "Seminário 7 Ortop", type: "trabalho" },
     // NOVO: Pediatria P1
     { d: "15/04", disc: "Pediatria", title: "P1 Teórica e Multimídia (13:30h)", type: "prova" },
     { d: "17/04", disc: "Ginecologia", title: "B1 DPGO", type: "pratica" },
@@ -32,12 +26,12 @@ const EXTERNAL_CONFIG = {
     // --- MAIO 2026 ---
     { d: "04/05", disc: "Oftalmologia", title: "Prática de Oftalmo", type: "pratica" },
     { d: "08/05", disc: "Ginecologia", title: "B2 DPGO", type: "pratica" },
-    { d: "11/05", disc: "Oftalmologia", title: "Seminário 1", type: "trabalho" },
+    { d: "11/05", disc: "Oftalmologia", title: "Seminário 1 Oftalmo", type: "trabalho" },
     { d: "15/05", disc: "Clínica Médica", title: "B2 CSR", type: "pratica" },
     { d: "15/05", disc: "Ginecologia", title: "B3 Hac GO", type: "pratica" },
     { d: "22/05", disc: "Clínica Médica", title: "B2 CSR", type: "pratica" },
     { d: "22/05", disc: "Ginecologia", title: "B3 DPGO", type: "pratica" },
-    { d: "25/05", disc: "Oftalmologia", title: "Seminário 2", type: "trabalho" },
+    { d: "25/05", disc: "Oftalmologia", title: "Seminário 2 Oftalmo", type: "trabalho" },
     { d: "29/05", disc: "Clínica Médica", title: "B3 CSR", type: "pratica" },
     { d: "29/05", disc: "Ginecologia", title: "B4 Hac GO", type: "pratica" },
 
@@ -51,8 +45,8 @@ const EXTERNAL_CONFIG = {
     { d: "15/06", disc: "Oftalmologia", title: "P2 (Projeto Mídias)", type: "trabalho" },
     
     // NOVO: Pediatria OSCE Dia 1
-    { d: "16/06", disc: "Pediatria", title: "OSCE P2 (13:00h)", type: "prova" },
-    { d: "16/06", disc: "Clínica Médica", title: "AVP2 (Início)", type: "final" },
+    { d: "16/06", disc: "Pediatria", title: "OSCE Ped", type: "prova" },
+    { d: "16/06", disc: "Clínica Médica", title: "AVP2 Clínica (Início)", type: "final" },
     
     // NOVO: Pediatria OSCE Dia 2
     { d: "17/06", disc: "Pediatria", title: "OSCE P2 (13:00h)", type: "prova" },
@@ -67,4 +61,3 @@ const EXTERNAL_CONFIG = {
     // NOVO: Pediatria Final
     { d: "07/07", disc: "Pediatria", title: "Avaliação Final (13:30h)", type: "final" }
   ]
-};
