@@ -3,342 +3,830 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-
 <title>Calendário Acadêmico 2026</title>
 <link rel="icon" type="image/png" href="favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-  /* ─── VARIÁVEIS ─── */
+  /* ─── APPLE DESIGN SYSTEM ─── */
   :root {
-    --bg-color: #0a0a0a;
-    --card-bg: rgba(24, 24, 24, 0.85);
-    --card-hover: rgba(255, 255, 255, 0.03);
-    --card-border: rgba(255, 255, 255, 0.05);
-    --text-main: #e0e0e0;
-    --text-muted: #888888;
-    --accent: #5c8dd6;
-    --tag-bg: rgba(255,255,255,0.05);
-    --tag-bg-active: var(--accent);
-    --input-bg: rgba(20, 20, 20, 0.9);
-    
-    /* Cores Badge */
-    --badge-today-bg: #ef4444; --badge-today-txt: #fff;
-    --badge-soon-bg: #eab308;  --badge-soon-txt: #000;
-    --badge-info-bg: rgba(255,255,255,0.1); --badge-info-txt: #ccc;
+    /* Apple Color Tokens */
+    --apple-action: #0066cc;
+    --apple-focus: #0071e3;
+    --apple-ink: #1d1d1f;
+    --apple-sky: #2997ff;
+    --apple-pearl: #fafafc;
+    --apple-white: #ffffff;
+    --apple-parchment: #f5f5f7;
+    --apple-tile-1: #272729;
+    --apple-tile-2: #2a2a2c;
+    --apple-tile-3: #252527;
+    --apple-black: #000000;
+    --apple-muted-80: rgba(0, 0, 0, 0.8);
+    --apple-muted-48: rgba(0, 0, 0, 0.48);
+    --apple-divider: rgba(0, 0, 0, 0.04);
+    --apple-hairline: rgba(0, 0, 0, 0.08);
+    --apple-chip: rgba(210, 210, 215, 0.64);
 
-    --danger: #cf4c4c; --success: #2ea073; --warning: #c78e28; --info: #4a7abd;
-    --radius: 16px; --font: 'Plus Jakarta Sans', sans-serif; --transition: 0.3s ease-in-out;
+    /* Semantic overrides for academic calendar */
+    --danger: #cf4c4c;
+    --success: #2ea073;
+    --warning: #c78e28;
+    --info: #4a7abd;
+
+    /* Surfaces */
+    --bg-color: var(--apple-white);
+    --tile-bg: var(--apple-parchment);
+    --card-bg: var(--apple-white);
+    --card-border: var(--apple-hairline);
+    --text-main: var(--apple-ink);
+    --text-muted: var(--apple-muted-48);
+    --text-inverse: var(--apple-white);
+
+    /* Typography */
+    --font-display: "SF Pro Display", "SF Pro Icons", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-text: "SF Pro Text", "SF Pro Icons", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    /* Spacing */
+    --radius-pill: 980px;
+    --radius-card: 18px;
+    --radius-utility: 8px;
+    --radius-pearl: 11px;
+    --shadow-product: rgba(0, 0, 0, 0.22) 3px 5px 30px 0;
+    --transition: 0.3s ease-in-out;
   }
 
-  [data-theme="light"] {
-    --bg-color: #e5e7eb; --card-bg: rgba(250, 250, 250, 0.8);
-    --card-hover: rgba(255, 255, 255, 0.95); --card-border: rgba(0, 0, 0, 0.04);
-    --text-main: #333333; --text-muted: #666666;
-    --tag-bg: rgba(0,0,0,0.04); --input-bg: rgba(240, 240, 240, 0.9);
-    --accent: #3b71ca;
-    
-    --badge-today-bg: #dc2626; --badge-today-txt: #fff;
-    --badge-soon-bg: #ca8a04;  --badge-soon-txt: #fff;
-    --badge-info-bg: rgba(0,0,0,0.05); --badge-info-txt: #555;
+  [data-theme="dark"] {
+    --bg-color: var(--apple-black);
+    --tile-bg: var(--apple-tile-1);
+    --card-bg: var(--apple-tile-2);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-main: var(--apple-white);
+    --text-muted: rgba(255, 255, 255, 0.55);
+    --text-inverse: var(--apple-ink);
+    --apple-hairline: rgba(255, 255, 255, 0.08);
+    --apple-divider: rgba(255, 255, 255, 0.04);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
-  body { font-family: var(--font); background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; padding: 2rem 1rem; padding-top: 3rem; transition: background-color var(--transition), color var(--transition); }
-  .container { max-width: 720px; margin: 0 auto; position: relative; }
 
-  /* PROGRESSO */
-  .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 6px; background: var(--tag-bg); z-index: 1000; }
-  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); width: 0%; transition: width 1s ease-out; box-shadow: 0 0 10px var(--accent); }
-  .progress-label { position: fixed; top: 10px; right: 10px; font-size: 0.7rem; font-weight: 700; color: var(--text-muted); z-index: 1001; background: var(--card-bg); padding: 4px 8px; border-radius: 8px; border: 1px solid var(--card-border); backdrop-filter: blur(4px); }
+  html { scroll-behavior: smooth; }
 
-  /* HEADER */
-  header { margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-start; }
-  h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom: 0.5rem; }
-  .subtitle { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; }
-  .header-actions { display: flex; gap: 0.5rem; align-items: center; }
-  .theme-toggle { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition); }
-  .theme-toggle svg { width: 18px; height: 18px; }
+  body {
+    font-family: var(--font-text);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--transition), color var(--transition);
+  }
 
-  /* BOTÃO MODO REDUZIDO */
-  .btn-compact { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-muted); height: 44px; padding: 0 14px; border-radius: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; transition: var(--transition); font-family: var(--font); font-size: 0.75rem; font-weight: 700; white-space: nowrap; }
-  .btn-compact:hover { color: var(--accent); border-color: var(--accent); }
-  .btn-compact svg { width: 15px; height: 15px; flex-shrink: 0; }
+  /* ─── GLOBAL NAV ─── */
+  .global-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--apple-black);
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 22px;
+  }
+  .global-nav-inner {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .global-nav a, .global-nav button {
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.12px;
+    color: var(--apple-white);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .global-nav a:hover, .global-nav button:hover { opacity: 1; }
+  .global-nav .nav-logo {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.374px;
+    opacity: 1;
+  }
+  .global-nav .nav-actions { display: flex; gap: 20px; align-items: center; }
 
-  /* CONTROLS */
-  .controls { background: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(12px); border-radius: var(--radius); padding: 0.75rem 1rem; margin-bottom: 2rem; transition: background-color var(--transition), border-color var(--transition); }
-  .filter-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-  .tag { background: var(--tag-bg); border: 1px solid var(--card-border); color: var(--text-muted); padding: 5px 11px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: all 0.2s; user-select: none; }
-  .tag.active { background: var(--tag-bg-active); color: white; transform: scale(1.05); }
+  /* ─── SUB NAV ─── */
+  .sub-nav {
+    position: sticky;
+    top: 44px;
+    z-index: 999;
+    background: rgba(245, 245, 247, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--apple-hairline);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 22px;
+    transition: background-color var(--transition), border-color var(--transition);
+  }
+  [data-theme="dark"] .sub-nav {
+    background: rgba(39, 39, 41, 0.8);
+  }
+  .sub-nav-inner {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sub-nav-title {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.374px;
+    color: var(--apple-ink);
+  }
+  [data-theme="dark"] .sub-nav-title { color: var(--apple-white); }
+  .sub-nav-meta {
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--apple-muted-48);
+    margin-left: 12px;
+  }
+  .sub-nav-actions { display: flex; gap: 12px; align-items: center; }
 
-  /* LIST & CARDS */
-  .month-header { position: sticky; top: 0px; z-index: 10; background: var(--bg-color); backdrop-filter: blur(10px); padding: 10px 0; margin-bottom: 10px; font-size: 1.1rem; font-weight: 800; color: var(--accent); border-bottom: 1px solid var(--card-border); text-transform: capitalize; transition: background-color var(--transition), color var(--transition), border-color var(--transition); }
-  .event-list { display: flex; flex-direction: column; gap: 0.8rem; padding-bottom: 1rem; }
-  .event-card { display: grid; grid-template-columns: 70px 1fr auto; align-items: stretch; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid transparent; cursor: default; position: relative; transition: transform 0.2s, background-color var(--transition), border-color var(--transition); }
-  .event-card:hover { transform: translateY(-3px); background: var(--card-hover); border-color: var(--card-border); z-index: 2; }
-  
-  .date-box { background: var(--input-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 10px; font-size: 1.1rem; font-weight: 800; line-height: 1; color: var(--text-muted); transition: background-color var(--transition), color var(--transition); }
-  .date-box span { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; margin-top: 4px; }
-  .info-box { padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; }
-  .card-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-  .event-name { font-weight: 700; font-size: 1rem; color: var(--text-main); transition: color var(--transition); }
-  .event-disc { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-  .type-indicator { width: 5px; height: 100%; transition: background-color var(--transition); }
+  /* ─── BUTTONS ─── */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--apple-action);
+    color: var(--apple-white);
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.224px;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: transform 0.15s, background-color 0.2s;
+    text-decoration: none;
+  }
+  .btn-pill:hover { background: #0077ed; }
+  .btn-pill:active { transform: scale(0.95); }
+  .btn-pill:focus-visible { outline: 2px solid var(--apple-focus); outline-offset: 2px; }
 
-  /* CORES TIPOS */
-  .type-prova .date-box { color: var(--danger); background: rgba(207, 76, 76, 0.15); } .type-prova .type-indicator { background: var(--danger); }
-  .type-pratica .date-box { color: var(--success); background: rgba(46, 160, 115, 0.15); } .type-pratica .type-indicator { background: var(--success); }
-  .type-trabalho .date-box { color: var(--info); background: rgba(74, 122, 189, 0.15); } .type-trabalho .type-indicator { background: var(--info); }
-  .type-final .date-box { color: var(--warning); background: rgba(199, 142, 40, 0.15); } .type-final .type-indicator { background: var(--warning); }
-  .type-outros .date-box { color: var(--text-muted); background: rgba(128,128,128,0.1); } .type-outros .type-indicator { background: var(--text-muted); }
+  .btn-pill-ghost {
+    background: transparent;
+    color: var(--apple-action);
+    border: 1px solid var(--apple-action);
+  }
+  .btn-pill-ghost:hover { background: rgba(0, 102, 204, 0.05); }
 
-  /* BADGES */
-  .badge { font-size: 0.65rem; font-weight: 800; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.05em; margin-left: 10px; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background-color var(--transition), color var(--transition); }
-  .badge-today { background: var(--badge-today-bg); color: var(--badge-today-txt); animation: pulse 1.5s infinite; }
-  .badge-soon { background: var(--badge-soon-bg); color: var(--badge-soon-txt); }
-  .badge-info { background: var(--badge-info-bg); color: var(--badge-info-txt); border: 1px solid var(--card-border); }
-  @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-  
-  .actions { padding: 0 10px; display: flex; align-items: center; justify-content: center; }
-  .btn-add-cal { background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 8px; border-radius: 8px; transition: all 0.2s; }
-  .btn-add-cal:hover { background: var(--tag-bg); color: var(--accent); transform: scale(1.1); }
+  .btn-utility {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--apple-ink);
+    color: var(--apple-white);
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.224px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-utility);
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .btn-utility:active { transform: scale(0.95); }
+  .btn-utility:focus-visible { outline: 2px solid var(--apple-focus); outline-offset: 2px; }
+
+  .btn-pearl {
+    background: var(--apple-pearl);
+    color: var(--apple-muted-80);
+    border: 3px solid var(--apple-divider);
+    border-radius: var(--radius-pearl);
+    padding: 0 14px;
+    height: 32px;
+    font-size: 14px;
+  }
+  .btn-pearl:hover { background: var(--apple-white); }
+
+  .btn-icon {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: var(--radius-utility);
+    background: transparent;
+    color: var(--apple-ink);
+    border: 1px solid var(--apple-hairline);
+  }
+  [data-theme="dark"] .btn-icon { color: var(--apple-white); border-color: var(--card-border); }
+  .btn-icon:hover { background: var(--apple-parchment); }
+  [data-theme="dark"] .btn-icon:hover { background: var(--apple-tile-3); }
+
+  /* ─── TILES ─── */
+  .tile {
+    width: 100%;
+    padding: 64px 22px;
+    display: flex;
+    justify-content: center;
+  }
+  .tile-inner {
+    width: 100%;
+    max-width: 980px;
+  }
+  .tile-light { background: var(--apple-white); }
+  .tile-parchment { background: var(--apple-parchment); }
+  .tile-dark { background: var(--apple-tile-1); color: var(--apple-white); }
+  .tile-dark .tile-headline { color: var(--apple-white); }
+  .tile-dark .tile-subhead { color: rgba(255,255,255,0.8); }
+
+  .tile-headline {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.10;
+    letter-spacing: -0.28px;
+    color: var(--apple-ink);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .tile-subhead {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.19;
+    letter-spacing: 0.231px;
+    color: var(--apple-muted-48);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  /* ─── PROGRESS ─── */
+  .progress-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 32px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--apple-action);
+    width: 0%;
+    transition: width 1s ease-out;
+    border-radius: 2px;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: -0.224px;
+  }
+
+  /* ─── FILTERS ─── */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 8px 0;
+  }
+  .filter-pill {
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.224px;
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--apple-hairline);
+    background: transparent;
+    color: var(--apple-ink);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  [data-theme="dark"] .filter-pill {
+    color: var(--apple-white);
+    border-color: var(--card-border);
+  }
+  .filter-pill:hover { border-color: var(--apple-action); color: var(--apple-action); }
+  .filter-pill.active {
+    background: var(--apple-action);
+    color: var(--apple-white);
+    border-color: var(--apple-action);
+    transform: scale(1.03);
+  }
+
+  /* ─── EVENT CARDS (Apple Utility Card) ─── */
+  .events-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .event-card {
+    display: grid;
+    grid-template-columns: 76px 1fr auto;
+    align-items: stretch;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s;
+    cursor: default;
+  }
+  .event-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-product);
+    z-index: 2;
+  }
+
+  .date-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    background: var(--apple-parchment);
+    border-right: 1px solid var(--apple-hairline);
+    transition: background-color var(--transition);
+  }
+  [data-theme="dark"] .date-box {
+    background: var(--apple-tile-3);
+    border-right-color: var(--card-border);
+  }
+  .date-day {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.07;
+    letter-spacing: -0.28px;
+    color: var(--apple-ink);
+  }
+  [data-theme="dark"] .date-day { color: var(--apple-white); }
+  .date-month {
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.12px;
+    margin-top: 2px;
+    color: var(--apple-muted-48);
+  }
+
+  .info-box {
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+  }
+  .card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .event-name {
+    font-family: var(--font-text);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.24;
+    letter-spacing: -0.374px;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .event-disc {
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+    letter-spacing: -0.224px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .type-indicator {
+    width: 5px;
+    height: 100%;
+    transition: background-color var(--transition);
+  }
+
+  /* Type colors applied to indicator and date accent */
+  .type-prova .type-indicator { background: var(--danger); }
+  .type-prova .date-box { border-left: 3px solid var(--danger); }
+  .type-pratica .type-indicator { background: var(--success); }
+  .type-pratica .date-box { border-left: 3px solid var(--success); }
+  .type-trabalho .type-indicator { background: var(--info); }
+  .type-trabalho .date-box { border-left: 3px solid var(--info); }
+  .type-final .type-indicator { background: var(--warning); }
+  .type-final .date-box { border-left: 3px solid var(--warning); }
+  .type-outros .type-indicator { background: var(--text-muted); }
+  .type-outros .date-box { border-left: 3px solid var(--text-muted); }
+
+  .actions {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-add-cal {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-add-cal:hover {
+    background: var(--apple-parchment);
+    color: var(--apple-action);
+    transform: scale(1.1);
+  }
+  [data-theme="dark"] .btn-add-cal:hover { background: var(--apple-tile-3); }
   .btn-add-cal svg { width: 20px; height: 20px; }
 
-  /* ARQUIVO */
-  .archive-section { margin-top: 2rem; border-top: 1px dashed var(--card-border); padding-top: 2rem; transition: border-color var(--transition); }
-  .btn-archive-toggle { background: var(--tag-bg); color: var(--text-muted); border: 1px solid var(--card-border); padding: 10px 24px; border-radius: 99px; font-size: 0.85rem; font-weight: 700; cursor: pointer; width: 100%; transition: var(--transition); }
-  .btn-archive-toggle:hover { background: var(--card-hover); color: var(--text-main); }
-  .event-card.is-past { filter: grayscale(1); opacity: 0.5; }
+  /* ─── BADGES ─── */
+  .badge {
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    letter-spacing: -0.12px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color var(--transition), color var(--transition);
+  }
+  .badge-today {
+    background: var(--danger);
+    color: var(--apple-white);
+    animation: pulse 2s infinite;
+  }
+  .badge-soon {
+    background: var(--warning);
+    color: var(--apple-ink);
+  }
+  .badge-info {
+    background: var(--apple-parchment);
+    color: var(--apple-muted-80);
+    border: 1px solid var(--apple-hairline);
+  }
+  [data-theme="dark"] .badge-info {
+    background: var(--apple-tile-3);
+    color: rgba(255,255,255,0.7);
+    border-color: var(--card-border);
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
 
-  /* SKELETON */
-  .skeleton { background: linear-gradient(90deg, var(--card-border) 25%, var(--card-hover) 50%, var(--card-border) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
-  .sk-card { height: 74px; border-radius: 12px; margin-bottom: 10px; }
-  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  /* ─── MONTH HEADER ─── */
+  .month-header {
+    position: sticky;
+    top: 96px;
+    z-index: 10;
+    background: var(--tile-bg);
+    backdrop-filter: blur(10px);
+    padding: 14px 0;
+    margin-bottom: 16px;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: 0.196px;
+    color: var(--apple-action);
+    border-bottom: 1px solid var(--apple-hairline);
+    text-transform: capitalize;
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+  }
 
-  /* ─── MODO REDUZIDO (OVERLAY) ─── */
+  /* ─── ARCHIVE ─── */
+  .archive-section { margin-top: 0; }
+  .btn-archive-toggle {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    background: transparent;
+    color: var(--apple-sky);
+    font-family: var(--font-text);
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: -0.374px;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.2s;
+  }
+  .btn-archive-toggle:hover { opacity: 0.7; }
+  .event-card.is-past {
+    opacity: 0.45;
+    filter: grayscale(0.8);
+  }
+  .event-card.is-past:hover {
+    opacity: 0.7;
+    filter: grayscale(0.4);
+  }
+
+  /* ─── EMPTY STATE ─── */
+  .empty-state {
+    text-align: center;
+    padding: 64px 22px;
+    font-family: var(--font-text);
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.19;
+    color: var(--text-muted);
+    letter-spacing: 0.231px;
+  }
+
+  /* ─── SKELETON ─── */
+  .skeleton {
+    background: linear-gradient(90deg, var(--apple-parchment) 25%, var(--apple-white) 50%, var(--apple-parchment) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 6px;
+  }
+  [data-theme="dark"] .skeleton {
+    background: linear-gradient(90deg, var(--apple-tile-3) 25%, var(--apple-tile-2) 50%, var(--apple-tile-3) 75%);
+    background-size: 200% 100%;
+  }
+  .sk-card { height: 90px; border-radius: var(--radius-card); margin-bottom: 12px; }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* ─── COMPACT OVERLAY ─── */
   .compact-overlay {
     display: none;
     position: fixed;
     inset: 0;
     z-index: 2000;
-    background: var(--bg-color);
+    background: var(--apple-white);
     overflow-y: auto;
-    padding: 0;
   }
+  [data-theme="dark"] .compact-overlay { background: var(--apple-black); }
   .compact-overlay.active { display: block; }
-
-  .compact-inner {
-    padding: 14px 14px 20px;
-    max-width: 100%;
-  }
-
-  /* Cabeçalho do modo reduzido */
+  .compact-inner { padding: 24px 22px 40px; max-width: 720px; margin: 0 auto; }
   .compact-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--apple-hairline);
   }
   .compact-header-title {
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.374px;
+    color: var(--apple-ink);
   }
+  [data-theme="dark"] .compact-header-title { color: var(--apple-white); }
   .compact-header-subtitle {
-    font-size: 0.7rem;
+    font-family: var(--font-text);
+    font-size: 14px;
     color: var(--text-muted);
-    opacity: 0.6;
     margin-top: 2px;
+    letter-spacing: -0.224px;
   }
-  .btn-close-compact {
-    background: var(--tag-bg);
-    border: 1px solid var(--card-border);
-    color: var(--text-muted);
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-family: var(--font);
-    font-size: 0.72rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: var(--transition);
-  }
-  .btn-close-compact:hover { color: var(--text-main); }
-
-  /* Grid de eventos compactos */
-  .compact-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  /* Separador de mês no modo reduzido */
+  .compact-grid { display: flex; flex-direction: column; gap: 4px; }
   .compact-month {
-    font-size: 0.62rem;
-    font-weight: 800;
-    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.374px;
+    color: var(--apple-action);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 6px 0 2px;
-    margin-top: 4px;
-    border-bottom: 1px solid var(--card-border);
-    margin-bottom: 2px;
+    padding: 12px 0 6px;
+    margin-top: 8px;
+    border-bottom: 1px solid var(--apple-hairline);
   }
   .compact-month:first-child { margin-top: 0; }
-
-  /* Linha de evento compacta */
   .compact-row {
     display: grid;
-    grid-template-columns: 36px 3px 1fr auto;
+    grid-template-columns: 40px 4px 1fr auto;
     align-items: center;
-    gap: 0 7px;
-    padding: 5px 6px;
-    border-radius: 7px;
-    background: var(--card-bg);
-    border: 1px solid transparent;
+    gap: 0 10px;
+    padding: 8px 10px;
+    border-radius: var(--radius-utility);
+    background: var(--apple-parchment);
     transition: background-color var(--transition);
   }
-
+  [data-theme="dark"] .compact-row { background: var(--apple-tile-3); }
   .compact-date {
-    font-size: 0.72rem;
-    font-weight: 800;
-    color: var(--text-muted);
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.224px;
+    color: var(--apple-ink);
     text-align: center;
     line-height: 1.1;
-    flex-shrink: 0;
   }
+  [data-theme="dark"] .compact-date { color: var(--apple-white); }
   .compact-date em {
     display: block;
     font-style: normal;
-    font-size: 0.58rem;
+    font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
-    opacity: 0.7;
+    letter-spacing: -0.08px;
+    opacity: 0.6;
+    color: var(--text-muted);
   }
-
   .compact-dot {
-    width: 3px;
+    width: 4px;
     border-radius: 99px;
-    height: 28px;
+    height: 32px;
     flex-shrink: 0;
   }
-
   .compact-text { min-width: 0; }
   .compact-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--text-main);
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.224px;
+    color: var(--apple-ink);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.2;
   }
+  [data-theme="dark"] .compact-title { color: var(--apple-white); }
   .compact-disc {
-    font-size: 0.6rem;
-    font-weight: 600;
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.12px;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
   .compact-badge {
-    font-size: 0.55rem;
-    font-weight: 800;
-    padding: 2px 5px;
-    border-radius: 4px;
-    letter-spacing: 0.04em;
+    font-family: var(--font-text);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: -0.08px;
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
     text-transform: uppercase;
     white-space: nowrap;
     flex-shrink: 0;
   }
 
-  /* Cores por tipo no modo compacto */
-  .compact-row.type-prova .compact-date { color: var(--danger); }
   .compact-row.type-prova .compact-dot { background: var(--danger); }
-  .compact-row.type-pratica .compact-date { color: var(--success); }
   .compact-row.type-pratica .compact-dot { background: var(--success); }
-  .compact-row.type-trabalho .compact-date { color: var(--info); }
   .compact-row.type-trabalho .compact-dot { background: var(--info); }
-  .compact-row.type-final .compact-date { color: var(--warning); }
   .compact-row.type-final .compact-dot { background: var(--warning); }
-  .compact-row.type-outros .compact-date { color: var(--text-muted); }
   .compact-row.type-outros .compact-dot { background: var(--text-muted); }
 
-  /* Legenda */
   .compact-legend {
     display: flex;
-    gap: 10px;
+    gap: 16px;
     flex-wrap: wrap;
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px solid var(--card-border);
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--apple-hairline);
   }
   .legend-item {
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 0.6rem;
-    font-weight: 700;
+    gap: 6px;
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -0.12px;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
-  .legend-dot {
-    width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0;
-  }
+  .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
   .legend-dot.prova { background: var(--danger); }
   .legend-dot.pratica { background: var(--success); }
   .legend-dot.trabalho { background: var(--info); }
   .legend-dot.final { background: var(--warning); }
 
-  /* ─── RESPONSIVIDADE (MOBILE) ─── */
-  @media (max-width: 600px) {
-    html { font-size: 14px; } 
-    body { padding: 1.5rem 0.8rem; padding-top: 2.5rem; }
-    .controls { padding: 0.6rem 0.8rem; }
-    .filter-tags { gap: 0.3rem; }
-    .tag { padding: 4px 9px; }
-    .event-card { grid-template-columns: 60px 1fr auto; }
-    .date-box { padding: 0 5px; }
-    .info-box { padding: 12px; }
-    .badge { margin-left: 6px; padding: 2px 6px; letter-spacing: 0; }
-    .btn-add-cal { padding: 6px; }
-    .btn-add-cal svg { width: 18px; height: 18px; }
-    .btn-compact span { display: none; }
-    .btn-compact { padding: 0 12px; }
+  /* ─── FOOTER ─── */
+  .site-footer {
+    background: var(--apple-parchment);
+    padding: 40px 22px;
+    text-align: center;
+    border-top: 1px solid var(--apple-hairline);
+  }
+  [data-theme="dark"] .site-footer {
+    background: var(--apple-tile-3);
+    border-top-color: var(--card-border);
+  }
+  .site-footer p {
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.12px;
+    color: var(--apple-muted-48);
+    line-height: 1.3;
   }
 
-  @media (max-width: 360px) {
-    html { font-size: 13px; }
-    .event-card { grid-template-columns: 55px 1fr auto; }
-    .card-top-row { flex-wrap: wrap; gap: 4px; }
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 734px) {
+    .tile { padding: 48px 18px; }
+    .tile-headline { font-size: 32px; letter-spacing: -0.28px; }
+    .tile-subhead { font-size: 19px; }
+    .event-card { grid-template-columns: 64px 1fr auto; }
+    .date-box { padding: 0 8px; }
+    .date-day { font-size: 24px; }
+    .info-box { padding: 14px 16px; }
+    .month-header { top: 88px; font-size: 24px; }
+    .sub-nav-title { font-size: 19px; }
+    .sub-nav { padding: 0 18px; }
+    .global-nav { padding: 0 18px; }
+    .compact-inner { padding: 18px; }
+  }
+
+  @media (max-width: 419px) {
+    .tile-headline { font-size: 28px; }
+    .event-card { grid-template-columns: 56px 1fr auto; }
+    .date-day { font-size: 21px; }
+    .event-name { font-size: 16px; }
+    .card-top-row { flex-wrap: wrap; gap: 6px; }
     .badge { margin-left: 0; }
+    .sub-nav { height: auto; padding: 10px 18px; }
+    .sub-nav-inner { flex-wrap: wrap; gap: 8px; }
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 
-<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
-<div class="progress-label" id="progressLabel">0%</div>
+<!-- GLOBAL NAV -->
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="#" class="nav-logo">Calendário</a>
+    <div class="nav-actions">
+      <button class="btn-icon" id="btnCompact" title="Modo Reduzido">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg>
+      </button>
+      <button class="btn-icon" id="themeBtn" title="Alternar tema">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
 
-<!-- OVERLAY MODO REDUZIDO -->
+<!-- SUB NAV -->
+<div class="sub-nav">
+  <div class="sub-nav-inner">
+    <div style="display:flex;align-items:baseline;">
+      <span class="sub-nav-title" id="appTitle">Calendário</span>
+      <span class="sub-nav-meta" id="appSubtitle">Carregando...</span>
+    </div>
+    <div class="sub-nav-actions">
+      <span class="badge badge-info" id="progressLabel" style="margin:0;">0%</span>
+    </div>
+  </div>
+</div>
+
+<!-- COMPACT OVERLAY -->
 <div class="compact-overlay" id="compactOverlay">
   <div class="compact-inner">
     <div class="compact-header">
       <div>
-        <div class="compact-header-title" id="compactTitle">Calendário · 7º Período</div>
+        <div class="compact-header-title" id="compactTitle">Calendário</div>
         <div class="compact-header-subtitle">Modo Reduzido — print-friendly</div>
       </div>
-      <button class="btn-close-compact" id="btnCloseCompact">✕ Fechar</button>
+      <button class="btn-utility" id="btnCloseCompact">✕ Fechar</button>
     </div>
     <div class="compact-grid" id="compactGrid"></div>
     <div class="compact-legend">
@@ -350,51 +838,83 @@
   </div>
 </div>
 
-<div class="container">
-  <header>
-    <div class="header-text">
-      <h1 id="appTitle">Calendário</h1>
-      <div class="subtitle" id="appSubtitle">Carregando...</div>
+<!-- HERO / PROGRESS TILE -->
+<section class="tile tile-dark">
+  <div class="tile-inner">
+    <h1 class="tile-headline" id="heroTitle">Calendário Acadêmico</h1>
+    <p class="tile-subhead" id="heroSubtitle">Acompanhe seu semestre</p>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressBar"></div>
     </div>
-    <div class="header-actions">
-      <button class="btn-compact" id="btnCompact" title="Modo Reduzido para print">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg>
-        <span>Modo Reduzido</span>
-      </button>
-      <button class="theme-toggle" id="themeBtn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg></button>
+    <div class="progress-meta">
+      <span>Início do semestre</span>
+      <span id="progressText">0% concluído</span>
+      <span>Fim do semestre</span>
     </div>
-  </header>
-
-  <div class="controls">
-    <div class="filter-tags" id="disciplineFilters"></div>
   </div>
+</section>
 
-  <main id="eventsContainer" class="event-list"></main>
-  
-  <div class="archive-section" id="archiveSection" style="display: none;">
+<!-- FILTERS TILE -->
+<section class="tile tile-parchment">
+  <div class="tile-inner">
+    <div class="filter-bar" id="disciplineFilters"></div>
+  </div>
+</section>
+
+<!-- EVENTS TILE -->
+<section class="tile tile-parchment" style="padding-top:0;">
+  <div class="tile-inner">
+    <main id="eventsContainer" class="events-grid"></main>
+  </div>
+</section>
+
+<!-- ARCHIVE TILE -->
+<section class="tile tile-dark" id="archiveSection" style="display:none;">
+  <div class="tile-inner">
     <button class="btn-archive-toggle" id="btnToggleArchive">Ver Histórico (<span id="archiveCount">0</span>)</button>
-    <div id="archiveContainer" class="event-list" style="margin-top: 15px; display: none;"></div>
+    <div id="archiveContainer" class="events-grid" style="margin-top: 24px; display: none;"></div>
   </div>
-</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>Calendário Acadêmico · Design inspirado na linguagem visual Apple</p>
+</footer>
 
 <script>
-    const script = document.createElement('script');
-    script.src = 'data.js?v=' + new Date().getTime();
-    document.body.appendChild(script);
-    script.onload = () => new App();
-    script.onerror = () => alert("Erro ao carregar 'data.js'.");
-</script>
+/* ─── DATA LOADER ─── */
+const script = document.createElement('script');
+script.src = 'data.js?v=' + new Date().getTime();
+document.body.appendChild(script);
+script.onload = () => new App();
+script.onerror = () => {
+  // Fallback demo data so the page still renders
+  window.EXTERNAL_CONFIG = {
+    title: "Calendário Acadêmico",
+    subtitle: "2026.1",
+    year: 2026,
+    semesterStart: "2026-02-01",
+    semesterEnd: "2026-07-01",
+    data: [
+      { d: "15/04", title: "Prova 1 — Cálculo III", disc: "Cálculo III", type: "prova" },
+      { d: "22/04", title: "Entrega Trabalho — Física", disc: "Física", type: "trabalho" },
+      { d: "28/04", title: "Prova 2 — Álgebra Linear", disc: "Álgebra Linear", type: "prova" },
+      { d: "05/05", title: "Aula Prática — Química", disc: "Química", type: "pratica" },
+      { d: "20/05", title: "Prova Final — Cálculo III", disc: "Cálculo III", type: "final" },
+    ]
+  };
+  new App();
+};
 
-<script>
 class App {
   constructor() {
     this.events = [];
     this.today = new Date(); this.today.setHours(0,0,0,0);
     this.state = { activeDisc: 'Todas', isArchiveOpen: false };
-    
+
     if (typeof EXTERNAL_CONFIG === 'undefined') return;
     this.renderSkeleton();
-    setTimeout(() => this.init(), 600);
+    setTimeout(() => this.init(), 400);
   }
 
   init() {
@@ -407,6 +927,8 @@ class App {
 
     document.getElementById('appTitle').innerText = CONFIG.title;
     document.getElementById('appSubtitle').innerText = CONFIG.subtitle;
+    document.getElementById('heroTitle').innerText = CONFIG.title;
+    document.getElementById('heroSubtitle').innerText = CONFIG.subtitle;
     document.getElementById('compactTitle').innerText = `${CONFIG.title} · ${CONFIG.subtitle}`;
 
     this.setupTheme();
@@ -425,11 +947,12 @@ class App {
     let pct = Math.floor((current / total) * 100);
     if (pct < 0) pct = 0; if (pct > 100) pct = 100;
     document.getElementById('progressBar').style.width = `${pct}%`;
-    document.getElementById('progressLabel').innerText = `${pct}% Concluído`;
+    document.getElementById('progressLabel').innerText = `${pct}%`;
+    document.getElementById('progressText').innerText = `${pct}% concluído`;
   }
 
   renderSkeleton() {
-    document.getElementById('eventsContainer').innerHTML = Array(5).fill('<div class="skeleton sk-card"></div>').join('');
+    document.getElementById('eventsContainer').innerHTML = Array(4).fill('<div class="skeleton sk-card"></div>').join('');
   }
 
   setupTheme() {
@@ -437,22 +960,22 @@ class App {
     let isDark = localStorage.getItem('theme') !== 'light';
     const apply = () => document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
     apply();
-    btn.onclick = () => { isDark = !isDark; localStorage.setItem('theme', isDark?'dark':'light'); apply(); };
+    btn.onclick = () => { isDark = !isDark; localStorage.setItem('theme', isDark ? 'dark' : 'light'); apply(); };
   }
 
   setupFilters() {
     const uniqueDiscs = ['Todas', ...new Set(this.events.map(e => e.disc))]
         .filter(d => d !== 'Início do caos');
-        
+
     const container = document.getElementById('disciplineFilters');
     container.innerHTML = '';
     uniqueDiscs.forEach(disc => {
       const btn = document.createElement('button');
-      btn.className = `tag ${disc === 'Todas' ? 'active' : ''}`;
+      btn.className = `filter-pill ${disc === 'Todas' ? 'active' : ''}`;
       btn.textContent = disc;
       btn.onclick = (e) => {
         this.state.activeDisc = disc;
-        document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.filter-pill').forEach(t => t.classList.remove('active'));
         e.target.classList.add('active');
         this.render();
       };
@@ -464,7 +987,8 @@ class App {
     const btn = document.getElementById('btnToggleArchive');
     btn.onclick = () => {
         this.state.isArchiveOpen = !this.state.isArchiveOpen;
-        document.getElementById('archiveContainer').style.display = this.state.isArchiveOpen ? 'flex' : 'none';
+        const container = document.getElementById('archiveContainer');
+        container.style.display = this.state.isArchiveOpen ? 'flex' : 'none';
         btn.innerText = this.state.isArchiveOpen ? "Ocultar Histórico" : `Ver Histórico (${document.getElementById('archiveCount').innerText})`;
     };
   }
@@ -474,33 +998,21 @@ class App {
     const btnOpen = document.getElementById('btnCompact');
     const btnClose = document.getElementById('btnCloseCompact');
 
-    btnOpen.onclick = () => {
-      this.renderCompact();
-      overlay.classList.add('active');
-      overlay.scrollTop = 0;
-    };
-
-    btnClose.onclick = () => {
-      overlay.classList.remove('active');
-    };
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') overlay.classList.remove('active');
-    });
+    btnOpen.onclick = () => { this.renderCompact(); overlay.classList.add('active'); overlay.scrollTop = 0; };
+    btnClose.onclick = () => overlay.classList.remove('active');
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') overlay.classList.remove('active'); });
   }
 
   renderCompact() {
     const grid = document.getElementById('compactGrid');
     grid.innerHTML = '';
-
     const allEvents = [...this.events].filter(ev => ev.disc !== 'Início do caos');
-
     let currentMonth = '';
+
     allEvents.forEach(ev => {
       const evMonth = ev.dateObj.toLocaleString('pt-BR', { month: 'long' });
       const evYear = ev.dateObj.getFullYear();
       const monthKey = `${evMonth} ${evYear}`;
-
       if (monthKey !== currentMonth) {
         currentMonth = monthKey;
         const header = document.createElement('div');
@@ -508,22 +1020,15 @@ class App {
         header.innerText = monthKey;
         grid.appendChild(header);
       }
-
       const isPast = ev.dateObj < this.today;
       const { day, month } = this.fmtBox(ev.dateObj);
-
       let urgencyHtml = '';
       if (!isPast) {
         const diffDays = Math.ceil((ev.dateObj - this.today) / (1000 * 60 * 60 * 24));
-        if (diffDays === 0) {
-          urgencyHtml = `<span class="compact-badge badge-today">Hoje</span>`;
-        } else if (diffDays === 1) {
-          urgencyHtml = `<span class="compact-badge badge-soon">Amanhã</span>`;
-        } else if (diffDays <= 7) {
-          urgencyHtml = `<span class="compact-badge badge-soon">${diffDays}d</span>`;
-        }
+        if (diffDays === 0) urgencyHtml = `<span class="compact-badge badge-today">Hoje</span>`;
+        else if (diffDays === 1) urgencyHtml = `<span class="compact-badge badge-soon">Amanhã</span>`;
+        else if (diffDays <= 7) urgencyHtml = `<span class="compact-badge badge-soon">${diffDays}d</span>`;
       }
-
       const row = document.createElement('div');
       row.className = `compact-row type-${ev.type}${isPast ? ' is-past' : ''}`;
       row.innerHTML = `
@@ -553,8 +1058,7 @@ class App {
 
   getUrgency(dateObj) {
     const diffTime = dateObj - this.today;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     if (diffDays === 0) return { text: 'Hoje!', class: 'badge-today' };
     if (diffDays === 1) return { text: 'Amanhã', class: 'badge-soon' };
     if (diffDays > 1 && diffDays <= 7) return { text: `${diffDays} dias`, class: 'badge-soon' };
@@ -563,23 +1067,24 @@ class App {
 
   createCard(ev, isPast, index) {
     const { day, month } = this.fmtBox(ev.dateObj);
-    
-    // Compute urgency for ALL future events; first 3 start visible, rest start hidden
     let urgency = null;
     if (!isPast) urgency = this.getUrgency(ev.dateObj);
 
     const el = document.createElement('div');
     el.className = `event-card type-${ev.type} ${isPast ? 'is-past' : ''}`;
-    
+
     const btnCal = document.createElement('button');
     btnCal.className = 'btn-add-cal';
     btnCal.title = "Abrir no Google Calendar";
     btnCal.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`;
-    btnCal.onclick = () => this.openGoogleCalendar(ev);
+    btnCal.onclick = (e) => { e.stopPropagation(); this.openGoogleCalendar(ev); };
 
     const badgeVisible = !isPast && index < 3;
     el.innerHTML = `
-      <div class="date-box">${day}<span>${month}</span></div>
+      <div class="date-box">
+        <div class="date-day">${day}</div>
+        <div class="date-month">${month}</div>
+      </div>
       <div class="info-box">
         <div class="card-top-row">
            <div class="event-name">${ev.title}</div>
@@ -590,7 +1095,6 @@ class App {
       <div class="type-indicator" title="${ev.type}"></div>
     `;
 
-    // Click on card toggles the badge for future events
     if (!isPast && urgency) {
       el.style.cursor = 'pointer';
       el.addEventListener('click', (e) => {
@@ -608,21 +1112,19 @@ class App {
   render() {
     const mainContainer = document.getElementById('eventsContainer');
     const archiveContainer = document.getElementById('archiveContainer');
-    
     const filtered = this.events.filter(ev => {
         const inDisc = this.state.activeDisc === 'Todas' || ev.disc === this.state.activeDisc;
         return inDisc;
     });
-
     const futureEvents = filtered.filter(ev => ev.dateObj >= this.today);
     const pastEvents = filtered.filter(ev => ev.dateObj < this.today);
 
     document.getElementById('archiveCount').innerText = pastEvents.length;
-    document.getElementById('archiveSection').style.display = pastEvents.length > 0 ? 'block' : 'none';
+    document.getElementById('archiveSection').style.display = pastEvents.length > 0 ? 'flex' : 'none';
 
     mainContainer.innerHTML = '';
     if (futureEvents.length === 0) {
-        mainContainer.innerHTML = `<div class="empty-state">🍃 Nada pendente.</div>`;
+        mainContainer.innerHTML = `<div class="empty-state">Nada pendente no calendário.</div>`;
     } else {
         let currentMonth = '';
         futureEvents.forEach((ev, index) => {
